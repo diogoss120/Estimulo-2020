@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "713024909449",
+    "firebase_url": "https://estimulo2020-af05e.firebaseio.com",
+    "project_id": "estimulo2020-af05e",
+    "storage_bucket": "estimulo2020-af05e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:713024909449:android:8b78ff46a8644e5aa35658",
+        "android_client_info": {
+          "package_name": "com.example.estimulo2020"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "713024909449-don8m2l2pg1f1pb35n3pk45fthpd2ceu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxZKCqXPZ4KceDCMCle-hGCeZE5EUM0aU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "713024909449-don8m2l2pg1f1pb35n3pk45fthpd2ceu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
