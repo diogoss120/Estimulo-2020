@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import "cadastro.dart";
+import 'cadastro.dart';
+import 'identificador.dart';
 
 class Termos extends StatelessWidget {
   @override
@@ -124,7 +125,8 @@ class CorpoDosTermosState extends State<CorpoDosTermos> {
                     ? () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Cadastro()),
+                          MaterialPageRoute(
+                              builder: (context) => Identificador()),
                         );
                       }
                     : null,

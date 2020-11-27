@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'trilhas.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Cadastro extends StatelessWidget {
+  var identificador = "";
+  Cadastro(this.identificador);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,25 +20,29 @@ class Cadastro extends StatelessWidget {
             },
           ),
         ),
-        body: PaginaDeCadastro(),
+        body: PaginaDeCadastro(identificador),
       ),
     );
   }
 }
 
 class PaginaDeCadastro extends StatefulWidget {
-  PaginaDeCadastroState createState() => PaginaDeCadastroState();
+  var identificador = '';
+  PaginaDeCadastro(this.identificador);
+  PaginaDeCadastroState createState() => PaginaDeCadastroState(identificador);
 }
 
 class PaginaDeCadastroState extends State<PaginaDeCadastro> {
   final nome = GlobalKey<FormState>();
   final email = GlobalKey<FormState>();
   final cnpj = GlobalKey<FormState>();
+  final cpf = GlobalKey<FormState>();
   final celular = GlobalKey<FormState>();
   final senhaUm = GlobalKey<FormState>();
   final senhaDois = GlobalKey<FormState>();
   TextEditingController cNome = TextEditingController();
   TextEditingController cEmail = TextEditingController();
+  TextEditingController cCpf = TextEditingController();
   TextEditingController cCnpj = TextEditingController();
   TextEditingController cCelular = TextEditingController();
   TextEditingController cSenhaUm = TextEditingController();
@@ -44,6 +51,21 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
   static const double tamEsp = 16;
   bool exibirSenhaUm = false;
   bool exibirSenhaDois = false;
+
+  PaginaDeCadastroState(String cpf) {
+    cCpf.text = cpf;
+  }
+
+  salvaUsuario() async {
+    Firestore banco = Firestore();
+    DocumentReference referencia = await banco.collection('usuarios').add({
+      'nome': cNome.text.toString(),
+      'email': cEmail.text.toString(),
+      'celular': cCelular.text.toString(),
+      'cnpj': cCnpj.text.toString(),
+      'senha': cSenhaUm.text.hashCode.toString()
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +92,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                   Row(
                     children: [
                       Text(
-                        "Nome",
+                        "Nome Completo",
                         style: TextStyle(
                             fontSize: tamText,
                             fontWeight: FontWeight.w400,
@@ -93,8 +115,48 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Informe o seu nome";
-                        } else if (value.length < 4) {
+                        } else if (value.length < 8) {
                           return "Nome muito pequeno";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: tamEsp, bottom: tamEsp),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "CPF",
+                        style: TextStyle(
+                            fontSize: tamText,
+                            fontWeight: FontWeight.w400,
+                            fontStyle: FontStyle.italic),
+                      )
+                    ],
+                  ),
+                  Form(
+                    key: cpf,
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.perm_identity),
+                      ),
+                      enabled: false,
+                      controller: cCpf,
+                      keyboardType: TextInputType.name,
+                      onSaved: (value) {
+                        print(value);
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return "Informe o seu CPF";
+                        } else if (value.length < 11) {
+                          return "CPF invalido";
                         }
                         return null;
                       },
@@ -350,16 +412,21 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
             Container(
               margin: EdgeInsets.only(top: 12),
               child: RaisedButton(
-                onPressed: () {
-                  //email.currentState.validate();
+                onPressed: () async {
                   if (nome.currentState.validate() &&
                       email.currentState.validate() &&
                       cnpj.currentState.validate() &&
+                      cpf.currentState.validate() &&
                       celular.currentState.validate() &&
                       senhaUm.currentState.validate() &&
                       senhaDois.currentState.validate()) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Trilhas()));
+                    salvaUsuario();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Trilhas(),
+                      ),
+                    );
                   }
                 },
                 shape: RoundedRectangleBorder(
