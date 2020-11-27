@@ -1,0 +1,43 @@
+html, body{
+    margin : 0;
+    padding : 0;
+    box-sizing: border-box;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+}
+body > form{
+    max-width: 500px;
+    width: 90%;
+    color:white;
+}
+
+form  div {
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+form fieldset{
+    border: 1px solid white;
+}
+form  div > input , form  div > button{
+    border-radius: 5px;
+    margin: 4px 0px;
+    border: none;
+    outline: none;
+    padding: 9px;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+}
+form  div > button{
+    width: 150px;
+    margin: 20px auto;
+    font-weight: 600;
+    cursor: pointer;
+}
