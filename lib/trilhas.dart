@@ -1,8 +1,11 @@
 import 'package:estimulo2020/capacitacao.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'acompanhamento.dart';
+import 'mentoria.dart';
 
 class Trilhas extends StatelessWidget {
+  final usuarioEmail;
+  Trilhas(this.usuarioEmail);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -10,17 +13,57 @@ class Trilhas extends StatelessWidget {
       title: 'Trilhas',
       home: Scaffold(
         appBar: AppBar(
-          centerTitle: true,
           title: Text("Selecione a trilha de sejada"),
           backgroundColor: Colors.lightBlue[800],
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 35,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    // retorna um objeto do tipo Dialog
+                    return AlertDialog(
+                      title: new Text("Configurações"),
+                      content: new Text("Selecione a opção desejada!"),
+                      actions: <Widget>[
+                        new FlatButton(
+                          child: Center(
+                            child: Text("Suporte"),
+                          ),
+                          onPressed: () {},
+                        ),
+                        new FlatButton(
+                          child: Center(
+                            child: Text("Sobre"),
+                          ),
+                          onPressed: () {},
+                        ),
+                        new FlatButton(
+                          child: new Text("Sair"),
+                          onPressed: () {},
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            )
+          ],
         ),
-        body: Paginas(),
+        body: Paginas(usuarioEmail),
       ),
     );
   }
 }
 
 class Paginas extends StatefulWidget {
+  final usuarioEmail;
+  Paginas(this.usuarioEmail);
   PaginasState createState() => PaginasState();
 }
 
@@ -57,12 +100,14 @@ class PaginasState extends State<Paginas> {
                             fontStyle: FontStyle.italic),
                       ),
                       FlatButton(
-                        child: const Text('Firebase'),
+                        child: const Text('COMEÇAR'),
                         onPressed: () {
-                          Firestore.instance
-                              .collection("usuarios")
-                              .document("pontuacao")
-                              .setData({"vitor": "estudante", "idade": "17"});
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Mentoria(),
+                            ),
+                          );
                         },
                       ),
                     ],
@@ -140,7 +185,15 @@ class PaginasState extends State<Paginas> {
                       ),
                       FlatButton(
                         child: const Text('COMEÇAR'),
-                        onPressed: () {/* ... */},
+                        onPressed: () {
+                          var _email = widget.usuarioEmail;
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Acompanhamento(_email),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   )

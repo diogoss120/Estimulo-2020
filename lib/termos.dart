@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'cadastro.dart';
-import 'identificador.dart';
 
 class Termos extends StatelessWidget {
   @override
@@ -47,121 +46,122 @@ class CorpoDosTermosState extends State<CorpoDosTermos> {
 
   @override
   Widget build(BuildContext contex) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.all(30),
-          child: Text(
-            'Leia atentamente os termos',
-            style: TextStyle(
-              fontSize: 22,
-              color: Colors.grey[700],
-              fontWeight: FontWeight.bold,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.all(30),
+            child: Text(
+              'Leia atentamente os termos',
+              style: TextStyle(
+                fontSize: 22,
+                color: Colors.grey[700],
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        Container(
-          padding: EdgeInsets.all(30),
-          child: Text(
-            "ACEITO DOS TERMOS DE USO DO FINANCIAMENTO QUE JÁ ADQUIRI PREVIAMENTE COM O ESTIMULO 2020, ENTENDO A OBRIGATORIEDADE DE PREENCHER OS FORMULARIOS DISPOSTOS NO APLICATIVO PARA ACOMPANHAMENTO DOS INVESTIMENTOS FEITOS POR MIM; CONCORDO COM A POLÍTICA DE PRIVACIDADE DO CONTRATO DE FINANCIAMENTO E DO USO DO APLICATIVO, ESTOU SUJEITO AOS MEIOS DE CONBRANÇA ADICIONAIS DISPOSTOS NO CONTRATO EM CASO DE INADIMPLEMENTO DAS MENSALIDADES OU DE NÃO PREENCHIMENTO DO FORMULARIO DE ACOMPANHAMENTO OBRIGADÓRIO SEMPRE QUE O MESMO ESTIVER DISPONIVEL NO APLICATIVO..",
-            textDirection: TextDirection.ltr,
-            textAlign: TextAlign.justify,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
+          Container(
+            padding: EdgeInsets.all(30),
+            child: Text(
+              "ACEITO DOS TERMOS DE USO DO FINANCIAMENTO QUE JÁ ADQUIRI PREVIAMENTE COM O ESTIMULO 2020, ENTENDO A OBRIGATORIEDADE DE PREENCHER OS FORMULARIOS DISPOSTOS NO APLICATIVO PARA ACOMPANHAMENTO DOS INVESTIMENTOS FEITOS POR MIM; CONCORDO COM A POLÍTICA DE PRIVACIDADE DO CONTRATO DE FINANCIAMENTO E DO USO DO APLICATIVO, ESTOU SUJEITO AOS MEIOS DE CONBRANÇA ADICIONAIS DISPOSTOS NO CONTRATO EM CASO DE INADIMPLEMENTO DAS MENSALIDADES OU DE NÃO PREENCHIMENTO DO FORMULARIO DE ACOMPANHAMENTO OBRIGADÓRIO SEMPRE QUE O MESMO ESTIVER DISPONIVEL NO APLICATIVO..",
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.justify,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        ),
-        Container(
-          margin: EdgeInsets.all(18),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: termosUso
-                        ? Icon(Icons.check_box)
-                        : Icon(Icons.check_box_outline_blank),
-                    onPressed: () {
-                      setState(
-                        () {
-                          termosUso = !termosUso;
-                        },
-                      );
-                      habilitaButton();
-                    },
-                  ),
-                  Text('Aceito os termos de uso!')
-                ],
-              ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: termosPrivacidade
-                        ? Icon(Icons.check_box)
-                        : Icon(Icons.check_box_outline_blank),
-                    onPressed: () {
-                      setState(
-                        () {
-                          termosPrivacidade = !termosPrivacidade;
-                        },
-                      );
-                      habilitaButton();
-                    },
-                  ),
-                  Text('Aceito os termos de privacidade!')
-                ],
-              ),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.all(15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              RaisedButton(
-                onPressed: buttonHabilitado
-                    ? () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Identificador()),
+          Container(
+            margin: EdgeInsets.all(18),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      icon: termosUso
+                          ? Icon(Icons.check_box)
+                          : Icon(Icons.check_box_outline_blank),
+                      onPressed: () {
+                        setState(
+                          () {
+                            termosUso = !termosUso;
+                          },
                         );
-                      }
-                    : null,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
+                        habilitaButton();
+                      },
+                    ),
+                    Text('Aceito os termos de uso!')
+                  ],
                 ),
-                color: Colors.green[700],
-                child: Container(
-                  width: 140,
-                  height: 50,
-                  child: Center(
-                    child: Text('Continuar',
-                        style: TextStyle(color: Colors.white)),
-                  ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: termosPrivacidade
+                          ? Icon(Icons.check_box)
+                          : Icon(Icons.check_box_outline_blank),
+                      onPressed: () {
+                        setState(
+                          () {
+                            termosPrivacidade = !termosPrivacidade;
+                          },
+                        );
+                        habilitaButton();
+                      },
+                    ),
+                    Text('Aceito os termos de privacidade!')
+                  ],
                 ),
-              ),
-              RaisedButton(
-                onPressed: () {},
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                color: Colors.red[900],
-                child: Container(
-                  width: 140,
-                  height: 50,
-                  child: Center(
-                    child:
-                        Text('Cancelar', style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        )
-      ],
+          Container(
+            margin: EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                RaisedButton(
+                  onPressed: buttonHabilitado
+                      ? () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Cadastro()),
+                          );
+                        }
+                      : null,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  color: Colors.green[700],
+                  child: Container(
+                    width: 140,
+                    height: 50,
+                    child: Center(
+                      child: Text('Continuar',
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ),
+                RaisedButton(
+                  onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  color: Colors.red[900],
+                  child: Container(
+                    width: 140,
+                    height: 50,
+                    child: Center(
+                      child: Text('Cancelar',
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

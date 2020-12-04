@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_youtube/flutter_youtube.dart';
-//import 'api.dart';
 
 const chave_youtube = 'AIzaSyBDpq-IOTil2YD03woYFOQEAU_8pvdaS4A';
 const url_requissicao = 'https://www.googleapis.com/youtube/v3/';
 
 class Curso extends StatefulWidget {
-  String tituloDoCurso;
-  String canal;
+  final String tituloDoCurso;
+  final String canal;
   Curso(this.tituloDoCurso, this.canal);
   @override
   CursoState createState() => CursoState();
@@ -29,7 +28,7 @@ class CursoState extends State<Curso> {
     var resposta = await http.get(url_requissicao +
         "playlistItems" +
         "?part=snippet" +
-        "&maxResults=10" +
+        "&maxResults=222" +
         "&playlistId=$idPlaylist" +
         "&key=$chave_youtube");
 
@@ -50,8 +49,6 @@ class CursoState extends State<Curso> {
     } else {
       print("Erro na requisição");
     }
-    //adicionei 24/11 seguinte linha
-    //return listaDeAulas;
   }
 
   @override
@@ -79,37 +76,33 @@ class CursoState extends State<Curso> {
                     autoPlay: true,
                     fullScreen: true);
               },
-              child: Column(
-                children: [
-                  Card(
-                    elevation: 2,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 220,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(listaDeAulas[index].imagem),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+              child: Card(
+                elevation: 2,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 220,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(listaDeAulas[index].imagem),
+                          fit: BoxFit.cover,
                         ),
-                        Container(
-                          margin: EdgeInsets.all(5),
-                          child: ListTile(
-                            title: Text(
-                              listaDeAulas[index].titulo,
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            leading: Icon(Icons.play_circle_outline),
-                            //subtitle: Icon(Icons.check),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      margin: EdgeInsets.all(5),
+                      child: ListTile(
+                        title: Text(
+                          listaDeAulas[index].titulo,
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w600),
+                        ),
+                        leading: Icon(Icons.play_circle_outline),
+                        //subtitle: Icon(Icons.check),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -125,52 +118,3 @@ class Aulas {
   String titulo;
   Aulas(this.id, this.titulo, this.imagem);
 }
-
-/*
-ListView.builder(
-          itemCount: listaDeAulas.length,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                FlutterYoutube.playYoutubeVideoById(
-                    apiKey: chave_youtube,
-                    videoId: listaDeAulas[index].id,
-                    autoPlay: true,
-                    fullScreen: true);
-              },
-              child: Column(
-                children: [
-                  Card(
-                    elevation: 2,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: 220,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(listaDeAulas[index].imagem),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(5),
-                          child: ListTile(
-                            title: Text(
-                              listaDeAulas[index].titulo,
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w600),
-                            ),
-                            leading: Icon(Icons.play_circle_outline),
-                            //subtitle: Icon(Icons.check),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-*/

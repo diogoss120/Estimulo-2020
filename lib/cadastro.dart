@@ -3,8 +3,6 @@ import 'trilhas.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Cadastro extends StatelessWidget {
-  var identificador = "";
-  Cadastro(this.identificador);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,16 +18,14 @@ class Cadastro extends StatelessWidget {
             },
           ),
         ),
-        body: PaginaDeCadastro(identificador),
+        body: PaginaDeCadastro(),
       ),
     );
   }
 }
 
 class PaginaDeCadastro extends StatefulWidget {
-  var identificador = '';
-  PaginaDeCadastro(this.identificador);
-  PaginaDeCadastroState createState() => PaginaDeCadastroState(identificador);
+  PaginaDeCadastroState createState() => PaginaDeCadastroState();
 }
 
 class PaginaDeCadastroState extends State<PaginaDeCadastro> {
@@ -52,13 +48,10 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
   bool exibirSenhaUm = false;
   bool exibirSenhaDois = false;
 
-  PaginaDeCadastroState(String cpf) {
-    cCpf.text = cpf;
-  }
-
   salvaUsuario() async {
     Firestore banco = Firestore();
-    DocumentReference referencia = await banco.collection('usuarios').add({
+    await banco.collection('usuarios').document(cCpf.text.toString()).setData({
+      'habilitado': true,
       'nome': cNome.text.toString(),
       'email': cEmail.text.toString(),
       'celular': cCelular.text.toString(),
@@ -109,6 +102,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                       ),
                       controller: cNome,
                       keyboardType: TextInputType.name,
+                      style: TextStyle(fontSize: 18),
                       onSaved: (value) {
                         print(value);
                       },
@@ -145,17 +139,18 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                     child: TextFormField(
                       decoration: InputDecoration(
                         icon: Icon(Icons.perm_identity),
+                        hintText: 'Ex: usuario@email.com',
                       ),
-                      enabled: false,
+                      style: TextStyle(fontSize: 18),
                       controller: cCpf,
-                      keyboardType: TextInputType.name,
+                      keyboardType: TextInputType.number,
                       onSaved: (value) {
                         print(value);
                       },
                       validator: (value) {
                         if (value.isEmpty) {
                           return "Informe o seu CPF";
-                        } else if (value.length < 11) {
+                        } else if (value.length != 11) {
                           return "CPF invalido";
                         }
                         return null;
@@ -189,6 +184,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                         icon: Icon(Icons.email),
                       ),
                       controller: cEmail,
+                      style: TextStyle(fontSize: 18),
                       keyboardType: TextInputType.emailAddress,
                       onSaved: (value) {
                         print(value);
@@ -231,6 +227,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                       ),
                       controller: cCelular,
                       keyboardType: TextInputType.phone,
+                      style: TextStyle(fontSize: 18),
                       //keyboardType: TextInputType.number,
                       onSaved: (value) {
                         print(value);
@@ -286,7 +283,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                       ),
                       controller: cSenhaUm,
                       obscureText: !exibirSenhaUm,
-
+                      style: TextStyle(fontSize: 18),
                       onSaved: (value) {
                         print(value);
                       },
@@ -338,6 +335,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                           },
                         ),
                       ),
+                      style: TextStyle(fontSize: 18),
                       controller: cSenhaDois,
                       obscureText: !exibirSenhaDois,
                       onSaved: (value) {
@@ -393,6 +391,7 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                       ),
                       controller: cCnpj,
                       keyboardType: TextInputType.number,
+                      style: TextStyle(fontSize: 18),
                       onSaved: (value) {
                         print(value);
                       },
@@ -421,10 +420,11 @@ class PaginaDeCadastroState extends State<PaginaDeCadastro> {
                       senhaUm.currentState.validate() &&
                       senhaDois.currentState.validate()) {
                     salvaUsuario();
+                    var _email = cEmail.text.toString();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Trilhas(),
+                        builder: (context) => Trilhas(_email),
                       ),
                     );
                   }
