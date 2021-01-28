@@ -1,6 +1,6 @@
 # estimulo2020
 
-
+:computer:
 
 O grupo Ânima Educação e o Estímulo 2020 se uniram no desenvolvimento da iniciativa “Consulte a Ânima”, que consiste em consultorias personalizadas e gratuitas por três meses para pequenos e médios empresários, que receberam crédito do Estímulo 2020. Esse projeto tem o intuito de auxiliar na construção de soluções e processos que sejam mais efetivos para o desenvolvimento dessas mesmas empresas.
 
