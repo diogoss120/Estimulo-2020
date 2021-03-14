@@ -1,9 +1,6 @@
 # estimulo2020
 
 :computer:
-
-O grupo Ânima Educação e o Estímulo 2020 se uniram no desenvolvimento da iniciativa “Consulte a Ânima”, que consiste em consultorias personalizadas e gratuitas por três meses para pequenos e médios empresários, que receberam crédito do Estímulo 2020. Esse projeto tem o intuito de auxiliar na construção de soluções e processos que sejam mais efetivos para o desenvolvimento dessas mesmas empresas.
-
-Os alunos do curso de Sistemas de Informação e Análise e Desenvolvimento de Sistemas da Una Aimorés irão desenvolver um aplicativo para gestão da consultoria Ânima e acompanhamento das empresas.
-
-Faço parte de uma das turmas da Una Aimores e estou desenvolvendo esse App com base nos requisitos do projeto estimulo 2020
+<p> 
+  Projeto acadêmico que desenvolvi um aplicativo Flutter/Dart de educação com autenticação de usuários de usuário que exibe playlsits inteiras de cursos do youtube dentro do proprio app.  
+</p>
